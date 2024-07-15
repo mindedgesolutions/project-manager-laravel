@@ -22,7 +22,30 @@ class ProjectRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'name' => 'required|min:3|max:255',
+            'description' => 'nullable|string',
+            'dueDate' => 'required|date|after:today',
+            'status' => 'required|in:pending,in_progress,completed',
+            'image' => 'nullable|image'
+        ];
+    }
+
+    public function attributes()
+    {
+        return [
+            'dueDate' => 'due date'
+        ];
+    }
+
+    public function messages()
+    {
+        return [
+            '*.required' => ':Attribute is required',
+            '*.min' => ':Attribute must be between 3 to 255 characters',
+            '*.max' => ':Attribute must be between 3 to 255 characters',
+            'after' => ':Attribute cannot be before today',
+            'in' => 'Invalid dropdown value',
+            'image' => 'Select an image file to upload'
         ];
     }
 }

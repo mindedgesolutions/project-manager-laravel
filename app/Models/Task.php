@@ -37,7 +37,7 @@ class Task extends Model
         return $this->belongsTo(User::class, 'updated_by', 'id');
     }
 
-    public function assignedBy()
+    public function assignedTo()
     {
         return $this->belongsTo(User::class, 'assigned_user_id', 'id');
     }

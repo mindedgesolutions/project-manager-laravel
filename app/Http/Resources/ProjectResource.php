@@ -4,6 +4,7 @@ namespace App\Http\Resources;
 
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
+use Illuminate\Support\Facades\Storage;
 
 use function Laravel\Prompts\select;
 
@@ -22,7 +23,7 @@ class ProjectResource extends JsonResource
             'description' => $this->description,
             'due_date' => $this->due_date,
             'status' => $this->status,
-            'image_path' => $this->image_path,
+            'image_path' => $this->image_path ? Storage::url($this->image_path) : '',
             'created_by' => $this->when($this->createdBy, function () {
                 return [
                     'id' => $this->createdBy->id,
